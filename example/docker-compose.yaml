@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+
+  talent_cypress_test:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: talent_cypress_test:latest
+    environment:
+      TARGET_REPO: au-xxx
+      TEST_UUID: '12345_abcde'
+    volumes:
+      - type: bind
+        source: /home/DOCKER/lp3_sfsf/cdp_cypress_test
+        target: /opt/xxx_cypress_test
+    container_name: talent_cypress_test_container
+    labels:
+      type: cypress
+      sig: 'n/a'
+    networks:
+      - network
+
+networks:
+  network:
