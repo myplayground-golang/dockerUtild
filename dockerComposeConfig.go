@@ -18,6 +18,7 @@ type ServiceConfig struct {
 	Capabilities  []string `mapstructure:"cap_add"`
 	Volumes       []VolumeBind
 	ContainerName string `mapstructure:"container_name"`
+	Command       []string
 	Labels        map[string]string
 	Networks      []string
 }

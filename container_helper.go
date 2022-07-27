@@ -19,12 +19,13 @@ func getServiceConfigFromYaml(dockerConfigYamlReader *viper.Viper) map[string]Se
 	return cfg.Services
 }
 
-func getContainerConfig(image string, exposedPorts nat.PortSet, labels map[string]string, environment []string) *container.Config {
+func getContainerConfig(image string, exposedPorts nat.PortSet, labels map[string]string, environment []string, cmd []string) *container.Config {
 	config := &container.Config{}
 	config.Image = image
 	config.ExposedPorts = exposedPorts
 	config.Labels = labels
 	config.Env = environment
+	config.Cmd = cmd
 	return config
 }
 

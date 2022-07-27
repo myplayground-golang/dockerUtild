@@ -13,6 +13,8 @@ func ParseCreateContainerOptionFromYaml(serviceConfigFromYaml map[string]Service
 	containerName := serviceConfig.ContainerName
 	// container labels
 	labels := serviceConfig.Labels
+	// command
+	cmds := serviceConfig.Command
 	// mounted volume
 	mounts := make(map[string]string, 0)
 	volumes := serviceConfig.Volumes
@@ -46,5 +48,6 @@ func ParseCreateContainerOptionFromYaml(serviceConfigFromYaml map[string]Service
 		Environments:  environments,
 		Capabilities:  capabilities,
 		Ports:         mappedPorts,
+		Commands:      cmds,
 	}
 }

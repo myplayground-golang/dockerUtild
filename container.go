@@ -71,6 +71,7 @@ type CreateContainerOption struct {
 	Environments  []string
 	Capabilities  []string
 	Ports         map[string]string
+	Commands      []string
 }
 
 func (d *DockerUtild) CreateContainerWithOption(ctx context.Context, option CreateContainerOption) (string, error) {
@@ -83,6 +84,7 @@ func (d *DockerUtild) CreateContainerWithOption(ctx context.Context, option Crea
 		option.Environments,
 		option.Capabilities,
 		option.Ports,
+		option.Commands,
 	)
 }
 
@@ -93,7 +95,8 @@ func (d *DockerUtild) CreateContainer(
 	mounts map[string]string,
 	environments []string,
 	capabilities []string,
-	mappedPorts map[string]string) (string, error) {
+	mappedPorts map[string]string,
+	commands []string) (string, error) {
 
 	// See:
 	// https://docs.docker.com/engine/api/v1.41/#operation/ContainerCreate
@@ -103,7 +106,7 @@ func (d *DockerUtild) CreateContainer(
 	if err != nil {
 		return "", err
 	}
-	config := getContainerConfig(image, exposedPorts, labels, environments)
+	config := getContainerConfig(image, exposedPorts, labels, environments, commands)
 
 	// create container.HostConfig
 	portMap, _ := getPortBindings(mappedPorts, &exposedPorts)
